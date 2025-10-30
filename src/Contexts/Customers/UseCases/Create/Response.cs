@@ -1,6 +1,4 @@
-namespace BugStore.Contexts.Customers.UseCases.Create;
+using BugStore.Contexts.SharedContext.UseCases.Abstractions;
 
-public class Response
-{
-    
-}
+namespace BugStore.Contexts.Customers.UseCases.Create;
+public sealed record Response(Guid Id, string Name, string Email, string Phone, DateTime BirthDate) : ICommandResponse;

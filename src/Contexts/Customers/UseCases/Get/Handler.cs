@@ -9,10 +9,11 @@ namespace BugStore.Contexts.Customers.UseCases.Get
         public async Task<Result<Response>> HandleAsync(Query request, CancellationToken cancellationToken = default)
         {
             var result = await repository.GetAllAsync(cancellationToken);
-            if(result.IsFailure)
-                return Result.Failure<Response>(result.Error);
+            if(result is null)
+                return Result.Failure<Response>(Error.NullValue);
 
-            return Result.Success(new Response(result.Value));
+            var customers = new Response(result);
+            return Result.Success(customers);
         }
         
     }

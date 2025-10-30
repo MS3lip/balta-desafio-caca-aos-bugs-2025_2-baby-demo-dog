@@ -10,9 +10,9 @@ public class Handler(ICustomerRepository repository) : IQueryHandler<Query, Resp
     {
         var result = await repository.GetByIdAsync(request.Id, cancellationToken);
         if (result is null)
-            return Result.Failure<Response>(new Error);
+            return Result.Failure<Response>(new Error("404", "Customer not found."));
 
-        var customer = result.Value;
-        return Result.Success(new Response(customer.Id, customer.Name, customer.Email, customer.Phone, customer.BirthDate));
+        var customer = new Response(result.Id, result.Name, result.Email, result.Phone, result.BirthDate);
+        return Result.Success(customer);
     }
 }
