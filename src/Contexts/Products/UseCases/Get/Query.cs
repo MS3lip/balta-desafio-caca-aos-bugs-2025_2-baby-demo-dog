@@ -1,6 +1,5 @@
+﻿using BugStore.Contexts.SharedContext.UseCases.Abstractions;
+
 namespace BugStore.Contexts.Products.UseCases.Get;
 
-public class Query
-{
-    
-}
+public record Query() : IQuery<Response>;

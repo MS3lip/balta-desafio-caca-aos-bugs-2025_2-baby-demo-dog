@@ -1,6 +1,5 @@
+using BugStore.Contexts.SharedContext.UseCases.Abstractions;
+
 namespace BugStore.Contexts.Customers.UseCases.Delete;
 
-public class Response
-{
-    
-}
+public sealed record Response(Guid Id, string Name) : ICommandResponse;

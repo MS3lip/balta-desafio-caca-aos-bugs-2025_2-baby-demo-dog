@@ -1,6 +1,6 @@
 ﻿using BugStore.Contexts.SharedContext.UseCases.Abstractions;
 
-namespace BugStore.Contexts.Customers.UseCases.GetById;
+namespace BugStore.Contexts.Products.UseCases.GetById;
 
 public record Query(Guid Id) : IQuery<Response>;
 

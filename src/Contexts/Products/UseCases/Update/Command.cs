@@ -1,6 +1,5 @@
+﻿using BugStore.Contexts.SharedContext.UseCases.Abstractions;
+
 namespace BugStore.Contexts.Products.UseCases.Update;
 
-public class Command
-{
-    
-}
+public sealed record Command(Guid Id, string Title, string Description, string Slug, decimal Price) : ICommand<Response>;

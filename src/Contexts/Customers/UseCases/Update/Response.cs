@@ -1,6 +1,5 @@
+using BugStore.Contexts.SharedContext.UseCases.Abstractions;
+
 namespace BugStore.Contexts.Customers.UseCases.Update;
 
-public class Response
-{
-    
-}
+public sealed record Response(Guid Id, string Name, string Email, string Phone, DateTime BirthDate) : ICommandResponse;

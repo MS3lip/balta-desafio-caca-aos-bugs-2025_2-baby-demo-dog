@@ -1,6 +1,24 @@
-﻿namespace BugStore.Contexts.Customers.UseCases.Update
+﻿using BugStore.Contexts.Customers.Repositories;
+using BugStore.Contexts.SharedContext.UseCases.Abstractions;
+using BugStore.Contexts.SharedContext.UseCases.Results;
+
+namespace BugStore.Contexts.Customers.UseCases.Update;
+
+public class Handler(ICustomerRepository repository) : ICommandHandler<Command, Response>
 {
-    public class Handler
+    public async Task<Result<Response>> HandleAsync(Command request, CancellationToken cancellationToken = default)
     {
+        var customer = await repository.GetByIdAsync(request.Id, cancellationToken);
+        if (customer is null)
+            return Result.Failure<Response>(new Error("404", "Customer not found."));
+
+        customer.Name = request.Name;
+        customer.Email = request.Email;
+        customer.Phone = request.Phone;
+        customer.BirthDate = request.BirthDate;
+
+        await repository.UpdateAsync(customer, cancellationToken);       
+        
+        return Result.Success(new Response(customer.Id, customer.Name, customer.Email, customer.Phone, customer.BirthDate));
     }
 }
